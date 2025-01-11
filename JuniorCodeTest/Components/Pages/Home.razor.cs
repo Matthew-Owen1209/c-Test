@@ -8,15 +8,15 @@ namespace JuniorCodeTest.Components.Pages
 {
 	public partial class Home : ComponentBase
 	{
-		public List<RequestedUsersModel> RandomUsers { get; set; } = [];
+		public List<RequestedUsersModel> RandomUsers { get; set; } = []; 
 
 		[Inject]
 		private IRandomUserApiService? RandomUserApiService { get; set; }
 
 
-		protected override async Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync() 
 		{
-			await base.OnInitializedAsync();
+			await base.OnInitializedAsync(); 
 
 			try
 			{
@@ -32,6 +32,12 @@ namespace JuniorCodeTest.Components.Pages
 		{
 			var users = await RandomUserApiService.GetRandomUserDataFromApi();
 			RandomUsers.AddRange(users);
+		}
+
+		async Task RefreshUserList()
+		{
+			RandomUsers.Clear();
+			await PopulateUserList();
 		}
 	}
 }

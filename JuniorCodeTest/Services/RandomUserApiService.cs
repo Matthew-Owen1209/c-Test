@@ -5,14 +5,14 @@ using System.Text.Json;
 
 namespace JuniorCodeTest.Services
 {
-	public class RandomUserApiService(HttpClient httpClient) : IRandomUserApiService
+	public class RandomUserApiService(HttpClient httpClient) : IRandomUserApiService 
 	{
-		private const string randomUserEndPoint = "https://randomuser.me/api";
+		private const string randomUserEndPoint = "https://randomuser.me/api/?results=5";
 
-		public async Task<List<RequestedUsersModel>> GetRandomUserDataFromApi()
+		public async Task<List<RequestedUsersModel>> GetRandomUserDataFromApi() 
 		{
 			var requiredDataList = new List<RequestedUsersModel>();
-			var response = await httpClient.GetAsync(randomUserEndPoint);
+			var response = await httpClient.GetAsync(randomUserEndPoint); 
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -27,12 +27,15 @@ namespace JuniorCodeTest.Services
 						var requiredData = new RequestedUsersModel()
 						{
 							Age = randomUser.dob.age,
-							First = randomUser.name.first,
-							Last = randomUser.name.last,
-							Title = randomUser.name.title
+							First = randomUser.name?.first,
+							Last = randomUser.name?.last,
+							Title = randomUser.name?.title,
+							Country = randomUser.location?.country,
+							Latitude = randomUser.location?.coordinates?.latitude,
+							Longitude = randomUser.location?.coordinates?.longitude
 						};
 
-						if (requiredDataList.Count >= 5)
+						if (requiredDataList.Count >= 5) 
 						{
 							break;
 						}
