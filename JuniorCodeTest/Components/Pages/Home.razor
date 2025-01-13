@@ -13,7 +13,7 @@
 }
 else
 {
-	<table class="table">
+	<table class="table" onmouseenter="expandRow()">
 		<thead>
 			<tr>
 				<th scope="col">Title</th>
@@ -42,5 +42,9 @@ else
 	</table>
 }
 
-<button type="button" @onclick="RefreshUserList" class="rounded btn btn-dark">Refresh</button>
 
+<button type="button" @onclick="RefreshUserList" class="rounded button-black">Refresh</button>
+
+
+
+<script src="./app.js"></script>
